@@ -1,0 +1,297 @@
+[
+    {
+        "name": "campaign_item_id",
+        "type": "numeric"
+    },
+    {
+        "name": "no_of_days",
+        "type": "numeric"
+    },
+    {
+        "name": "time",
+        "type": "categorical",
+        "sample_values": [
+            "2022-05-01",
+            "2022-05-02",
+            "2022-05-03",
+            "2022-05-04",
+            "2022-05-05",
+            "2022-05-31",
+            "2022-06-01",
+            "2022-06-02",
+            "2022-06-03",
+            "2022-06-04",
+            "2022-06-05",
+            "2022-06-06",
+            "2022-06-07",
+            "2022-06-08",
+            "2022-06-09",
+            "2022-06-10",
+            "2022-06-11",
+            "2022-06-12",
+            "2022-06-13",
+            "2022-06-14"
+        ]
+    },
+    {
+        "name": "ext_service_id",
+        "type": "numeric"
+    },
+    {
+        "name": "ext_service_name",
+        "type": "categorical",
+        "sample_values": [
+            "Facebook Ads",
+            "DV360",
+            "Google Ads"
+        ]
+    },
+    {
+        "name": "creative_id",
+        "type": "numeric"
+    },
+    {
+        "name": "creative_width",
+        "type": "numeric"
+    },
+    {
+        "name": "creative_height",
+        "type": "numeric"
+    },
+    {
+        "name": "search_tags",
+        "type": "categorical",
+        "sample_values": [
+            "#The Power of X",
+            "#Be Bold. Be X",
+            "#Embrace Your Individuality with X",
+            "#The Ultimate Fashion Statement with X",
+            "#The X Factor - Fashion for the Fearless",
+            "#Timeless X Style"
+        ]
+    },
+    {
+        "name": "template_id",
+        "type": "numeric"
+    },
+    {
+        "name": "landing_page",
+        "type": "categorical",
+        "sample_values": [
+            "https://www.abcjewelry.com/collections/boho-jewelry-for-women",
+            "https://www.abcjewelry.com/women/costume-jewelry/",
+            "https://www.abcjewelry.com/collections/rhinestone-jewelry-for-women",
+            "https://www.abcjewelry.com/collections",
+            "https://www.abcjewelry.com/collections/gemstone-jewelry-for-women",
+            "https://www.abcjewelry.com/collections/statement-necklaces-for-women",
+            "https://www.abcjewelry.com/collections/bold-jewelry-for-women",
+            "https://www.abcjewelry.com/collections/hoop-earrings-for-women",
+            "https://www.abcjewelry.com/collections/layered-jewelry-for-women",
+            "https://www.abcjewelry.com/collections/cuff-bracelets-for-women",
+            "https://www.abcjewelry.com/collections/pendant-necklaces-for-women",
+            "https://www.abcjewelry.com/collections/pearl-jewelry-for-women",
+            "https://www.abcjewelry.com/women/boho-jewelry/",
+            "https://www.abcjewelry.com/collections/beaded-jewelry-for-women",
+            "https://www.abcjewelry.com/women/fashion-jewelry",
+            "https://www.abcjewelry.com/women/handmade-jewelry/",
+            "https://www.abcjewelry.com/collections/beaded-bracelets-for-women",
+            "https://www.abcjewelry.com/collections/choker-necklaces-for-women",
+            "https://www.abcjewelry.com/women/designer-inspired-jewelry/",
+            "https://www.abcjewelry.com/women/vintage-inspired-jewelry/"
+        ]
+    },
+    {
+        "name": "advertiser_id",
+        "type": "numeric"
+    },
+    {
+        "name": "advertiser_name",
+        "type": "categorical",
+        "sample_values": [
+            "Web",
+            "Brand",
+            "Luxor",
+            "Almaza Bay",
+            "USA",
+            "Karnataka",
+            "Maharashtra",
+            "Oman",
+            "UAE",
+            "Cairo",
+            "Al Ahmadi",
+            "Addis Ababa",
+            "Vadodara",
+            "Chennai",
+            "Coimbatore",
+            "Malad",
+            "Indore",
+            "Pali",
+            "Andhra Pradesh",
+            "Kuala Lumpur"
+        ]
+    },
+    {
+        "name": "network_id",
+        "type": "numeric"
+    },
+    {
+        "name": "approved_budget",
+        "type": "numeric"
+    },
+    {
+        "name": "advertiser_currency",
+        "type": "categorical",
+        "sample_values": [
+            "SGD",
+            "USD",
+            "EGP",
+            "AED",
+            "INR"
+        ]
+    },
+    {
+        "name": "channel_id",
+        "type": "numeric"
+    },
+    {
+        "name": "channel_name",
+        "type": "categorical",
+        "sample_values": [
+            "Mobile",
+            "Social",
+            "Video",
+            "Display",
+            "Search"
+        ]
+    },
+    {
+        "name": "max_bid_cpm",
+        "type": "numeric"
+    },
+    {
+        "name": "network_margin",
+        "type": "numeric"
+    },
+    {
+        "name": "campaign_budget_usd",
+        "type": "numeric"
+    },
+    {
+        "name": "impressions",
+        "type": "numeric"
+    },
+    {
+        "name": "stats_currency",
+        "type": "categorical",
+        "sample_values": [
+            "SGD",
+            "USD",
+            "EGP",
+            "AED",
+            "INR"
+        ]
+    },
+    {
+        "name": "currency_code",
+        "type": "categorical",
+        "sample_values": [
+            "SGD",
+            "USD",
+            "EGP",
+            "AED",
+            "INR"
+        ]
+    },
+    {
+        "name": "exchange_rate",
+        "type": "numeric"
+    },
+    {
+        "name": "media_cost_usd",
+        "type": "numeric"
+    },
+    {
+        "name": "position_in_content",
+        "type": "categorical",
+        "sample_values": []
+    },
+    {
+        "name": "unique_reach",
+        "type": "categorical",
+        "sample_values": []
+    },
+    {
+        "name": "total_reach",
+        "type": "categorical",
+        "sample_values": []
+    },
+    {
+        "name": "search_tag_cat",
+        "type": "categorical",
+        "sample_values": [
+            "Others",
+            "Youtube",
+            "Inmarket",
+            "Retargeting",
+            "Affinity"
+        ]
+    },
+    {
+        "name": "cmi_currency_code",
+        "type": "categorical",
+        "sample_values": [
+            "SGD",
+            "USD",
+            "EGP",
+            "AED",
+            "INR"
+        ]
+    },
+    {
+        "name": "timezone",
+        "type": "categorical",
+        "sample_values": [
+            "Asia/Singapore",
+            "America/New_York",
+            "Africa/Cairo",
+            "US/Eastern",
+            "Asia/Kolkata",
+            "Asia/Muscat",
+            "Asia/Calcutta"
+        ]
+    },
+    {
+        "name": "weekday_cat",
+        "type": "categorical",
+        "sample_values": [
+            "week_end",
+            "week_day"
+        ]
+    },
+    {
+        "name": "keywords",
+        "type": "categorical",
+        "sample_values": [
+            "delicate bracelets",
+            "summer jewelry",
+            "artisan jewelry",
+            "layered bracelets",
+            "minimalist jewelry",
+            "beaded bracelets",
+            "bridal jewelry",
+            "unique and trendy jewelry",
+            "clip-on earrings",
+            "bohemian jewelry",
+            "layered jewelry",
+            "tribal jewelry",
+            "rhinestone jewelry",
+            "statement rings",
+            "mixed metal jewelry",
+            "chic and affordable jewelry",
+            "colorful jewelry",
+            "funky jewelry",
+            "cuff bracelets",
+            "elegant and modern jewelry"
+        ]
+    }
+]
