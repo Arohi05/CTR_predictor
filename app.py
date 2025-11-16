@@ -14,20 +14,19 @@ FEATURE_PATH = Path("model_output/feature_info.json")
 def load_model():
     model = joblib.load(MODEL_PATH)
 
-    # Load feature info safely
+    # Load saved feature names
     with open(FEATURE_PATH, "r") as f:
         feat_info = json.load(f)
 
-    selected_features = feat_info.get("selected_features", [])
+    feature_names = feat_info.get("selected_features", [])
 
-    # Validate feature list
-    if not isinstance(selected_features, list):
-        raise ValueError("'selected_features' in feature_info.json must be a list.")
+    if not isinstance(feature_names, list):
+        raise ValueError("'selected_features' must be a list.")
 
-    if len(selected_features) == 0:
-        raise ValueError("'selected_features' list is empty. Cannot build input form.")
+    if len(feature_names) == 0:
+        raise ValueError("'selected_features' is empty.")
 
-    return model, selected_features
+    return model, feature_names
 
 
 # Page setup
@@ -36,33 +35,42 @@ st.title("CTR Predictor App")
 
 # Load model + features
 try:
-    model, selected_features = load_model()
+    model, feature_names = load_model()
 except Exception as e:
     st.error(f"❌ Failed to load model or feature info: {e}")
     st.stop()
 
 
-st.subheader("Enter Feature Values")
-st.write("Provide values for each important feature used during training:")
+# Identify numeric vs categorical input groups
+numeric_features = [f for f in feature_names if "_" not in f]  # original numeric features
+categorical_prefixes = sorted({f.split("_")[0] for f in feature_names if "_" in f})
 
-# ---- Input Form ----
+st.subheader("Enter Input Values")
+st.write("Provide input values for each raw feature. The model handles encoding internally.")
+
+
 with st.form("predict_form"):
     user_input = {}
 
-    for feat in selected_features:
+    # Numeric Inputs
+    st.markdown("### 🔢 Numeric Features")
+    for feat in numeric_features:
         user_input[feat] = st.number_input(f"{feat}", value=0.0)
 
+    # Categorical Inputs
+    st.markdown("### 🔠 Categorical Features")
+    for prefix in categorical_prefixes:
+        user_input[prefix] = st.text_input(f"{prefix} (category)", value="")
+
     submit = st.form_submit_button("Predict CTR")
+
 
 # ---- Prediction ----
 if submit:
     input_df = pd.DataFrame([user_input])
 
-    # Ensure correct column order
-    input_df = input_df.reindex(columns=selected_features, fill_value=0.0)
-
     try:
-        prob = model.predict_proba(input_df)[0, 1]  # Probability of click
+        prob = model.predict_proba(input_df)[0, 1]  # probability of click
 
         st.success("✅ Prediction Successful!")
         st.metric("Predicted Click Probability", f"{prob:.4f}")
