@@ -1,0 +1,164 @@
+{
+  "trained_at": "2026-10-09T10:33:35+0000",
+  "sklearn_version": "1.9.1",
+  "features": [
+    "ext_service_name",
+    "channel_name",
+    "advertiser_name",
+    "advertiser_currency",
+    "search_tag_cat",
+    "creative_size",
+    "template_id",
+    "timezone",
+    "weekday_cat",
+    "campaign_day",
+    "campaign_budget_usd"
+  ],
+  "categorical": [
+    "ext_service_name",
+    "channel_name",
+    "advertiser_name",
+    "advertiser_currency",
+    "search_tag_cat",
+    "creative_size",
+    "template_id",
+    "timezone",
+    "weekday_cat"
+  ],
+  "numeric": [
+    "campaign_day",
+    "campaign_budget_usd"
+  ],
+  "categories": {
+    "ext_service_name": [
+      "DV360",
+      "Facebook Ads",
+      "Google Ads"
+    ],
+    "channel_name": [
+      "Display",
+      "Mobile",
+      "Search",
+      "Social",
+      "Video"
+    ],
+    "advertiser_name": [
+      "Addis Ababa",
+      "Al Ahmadi",
+      "Almaza Bay",
+      "Andhra Pradesh",
+      "Bahrain",
+      "Bangalore",
+      "Brand",
+      "Cairo",
+      "Chandpur",
+      "Chattogram",
+      "Chennai",
+      "Coimbatore",
+      "Delhi",
+      "Gujarat",
+      "Haryana",
+      "Indore",
+      "Jeddah",
+      "KSA",
+      "Karnataka",
+      "Kuala Lumpur",
+      "Kuwait",
+      "Luxor",
+      "Madhya Pradesh",
+      "Maharashtra",
+      "Malad",
+      "Malaysia",
+      "Muscat",
+      "North",
+      "Oman",
+      "Orissa",
+      "Pali",
+      "Pan India",
+      "Punjab",
+      "Qatar",
+      "Singapore",
+      "Sohar",
+      "Tamil Nadu",
+      "Thailand",
+      "UAE",
+      "UP",
+      "USA",
+      "Vadodara",
+      "Web",
+      "West Bengal"
+    ],
+    "advertiser_currency": [
+      "AED",
+      "EGP",
+      "INR",
+      "SGD",
+      "USD"
+    ],
+    "search_tag_cat": [
+      "Affinity",
+      "Inmarket",
+      "Others",
+      "Retargeting",
+      "Youtube"
+    ],
+    "creative_size": [
+      "300x250",
+      "none",
+      "unknown"
+    ],
+    "template_id": [
+      "-1",
+      "23",
+      "89",
+      "90",
+      "92",
+      "93"
+    ],
+    "timezone": [
+      "Africa/Cairo",
+      "America/New_York",
+      "Asia/Calcutta",
+      "Asia/Kolkata",
+      "Asia/Muscat",
+      "Asia/Singapore",
+      "US/Eastern"
+    ],
+    "weekday_cat": [
+      "week_day",
+      "week_end"
+    ]
+  },
+  "defaults": {
+    "ext_service_name": "Facebook Ads",
+    "channel_name": "Mobile",
+    "advertiser_name": "Oman",
+    "advertiser_currency": "AED",
+    "search_tag_cat": "Others",
+    "creative_size": "300x250",
+    "template_id": "90",
+    "timezone": "Asia/Kolkata",
+    "weekday_cat": "week_day",
+    "campaign_day": 19,
+    "campaign_budget_usd": 377.66
+  },
+  "numeric_ranges": {
+    "campaign_day": [
+      0,
+      118
+    ],
+    "campaign_budget_usd": [
+      0.0,
+      39559.9
+    ]
+  },
+  "average_ctr": 0.016403,
+  "metrics": {
+    "mae": 0.006736,
+    "baseline_mae": 0.010096,
+    "r2": 0.5001,
+    "train_rows": 61531,
+    "test_rows": 10924,
+    "test_note": "test set contains only campaigns not seen in training"
+  }
+}
