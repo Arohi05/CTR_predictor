@@ -67,3 +67,53 @@ def test_model_registration_and_lookup(client):
     found = client.find_model(prov["model_hash"])
     assert found["version"] == "v1" and found["dataset_hash"] == prov["dataset_hash"]
     assert client.find_model(hash_record({"m": 2})) is None
+
+
+# ---------------------------------------------------------------------------
+# Testnet path: transactions signed locally with a private key (what Sepolia uses)
+# ---------------------------------------------------------------------------
+from types import SimpleNamespace
+
+from web3 import EthereumTesterProvider, Web3
+
+from blockchain.chain_client import ChainError
+
+
+def funded_key_and_w3():
+    provider = EthereumTesterProvider()
+    w3 = Web3(provider)
+    key = provider.ethereum_tester.backend.account_keys[0].to_hex()  # a pre-funded test account
+    return key, w3
+
+
+@pytest.mark.parametrize("strip_prefix", [False, True])
+def test_signed_transactions_work_with_and_without_0x_prefix(tmp_path, strip_prefix):
+    key, w3 = funded_key_and_w3()
+    client = ChainClient(w3=w3, private_key=key[2:] if strip_prefix else key)
+    led = filled_ledger(tmp_path, 2)
+    assert client.sync_ledger(led) == 2
+    assert all(r["status"] == "matches chain" for r in client.verify_ledger(led))
+    prov = {"version": "v1", "model_hash": "ab" * 32, "dataset_hash": "cd" * 32, "metrics_hash": "ef" * 32}
+    client.register_model(prov)
+    assert client.find_model(prov["model_hash"])["version"] == "v1"
+    assert client.balance_eth() > 0
+
+
+def test_mainnet_is_refused():
+    fake = SimpleNamespace(eth=SimpleNamespace(chain_id=1))
+    with pytest.raises(ChainError, match="mainnet"):
+        ChainClient(w3=fake)
+
+
+def test_bad_private_key_gives_a_clear_error_without_leaking_it():
+    _, w3 = funded_key_and_w3()
+    with pytest.raises(ChainError) as err:
+        ChainClient(w3=w3, private_key="not-a-key-123")
+    assert "not-a-key-123" not in str(err.value)
+
+
+def test_explorer_links_only_on_known_public_networks(client):
+    assert client.tx_url("0x" + "00" * 32) is None  # local test chain has no explorer
+    client.chain_id = 11155111
+    assert client.tx_url("0xabc") == "https://sepolia.etherscan.io/tx/0xabc"
+    assert client.contract_url().startswith("https://sepolia.etherscan.io/address/0x")

@@ -110,12 +110,27 @@ with tab_chain:
     if chain is None:
         st.error(f"Blockchain not available: {chain_error}")
     else:
-        st.write(f"**Network:** {chain.network}  |  **Contract:** `{chain.address}`")
-        if not chain.persistent:
+        contract_link = chain.contract_url()
+        st.write(
+            f"**Network:** {chain.network} (chain id {chain.chain_id})  |  "
+            f"**Contract:** " + (f"[`{chain.address}`]({contract_link})" if contract_link else f"`{chain.address}`")
+        )
+        if chain.persistent:
+            st.caption(f"Account `{chain.sender}` has {chain.balance_eth():.4f} test ETH. Every anchoring costs a small fee in test ETH.")
+        else:
             st.info("Using an in-memory test chain: it resets when the app restarts, and the ledger is re-anchored automatically. "
-                    "Set `CTR_RPC_URL` to use a real local node or testnet (see README).")
-        if chain.batch_count() < len(ledger.blocks()):
-            chain.sync_ledger(ledger)  # re-anchor after a restart of the test chain
+                    "Set `CTR_RPC_URL` and `CTR_PRIVATE_KEY` to use a real test network such as Sepolia (see README).")
+            if chain.batch_count() < len(ledger.blocks()):
+                chain.sync_ledger(ledger)  # re-anchor after a restart of the test chain
+        missing = len(ledger.blocks()) - chain.batch_count()
+        if chain.persistent and missing > 0:
+            st.warning(f"{missing} sealed batch(es) are not on the chain yet.")
+            if st.button("Anchor the missing batches"):
+                try:
+                    chain.sync_ledger(ledger)
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"Could not anchor: {e}")
 
     st.subheader("1. Prediction ledger")
     pending = ledger.pending()
@@ -124,12 +139,22 @@ with tab_chain:
     if p2.button("Seal batch and anchor on blockchain", type="primary", disabled=not pending):
         block = ledger.seal_batch()
         if chain is not None:
-            tx = chain.anchor_block(block)
-            st.success(f"Batch {block.index} sealed ({block.record_count} records) and anchored. Transaction: `{tx}`")
+            try:
+                tx = chain.anchor_block(block)
+                st.session_state["flash"] = (
+                    "success",
+                    f"Batch {block.index} sealed ({block.record_count} records) and anchored. Transaction: "
+                    + (f"[`{tx}`]({chain.tx_url(tx)})" if chain.tx_url(tx) else f"`{tx}`"),
+                )
+            except Exception as e:  # e.g. out of test ETH: the batch stays sealed and can be anchored later
+                st.session_state["flash"] = ("error", f"Batch {block.index} was sealed locally but could not be anchored: {e}")
         else:
-            st.warning(f"Batch {block.index} sealed locally; blockchain unavailable, so it was not anchored.")
+            st.session_state["flash"] = ("warning", f"Batch {block.index} sealed locally; blockchain unavailable, so it was not anchored.")
         time.sleep(0.2)
         st.rerun()
+    if "flash" in st.session_state:  # shown once, after the page reloads
+        kind, text = st.session_state.pop("flash")
+        getattr(st, kind)(text)
 
     blocks = ledger.blocks()
     local = ledger.verify()
@@ -192,9 +217,15 @@ with tab_chain:
             else:
                 st.warning("This model is not registered on the blockchain yet.")
                 if st.button("Register model on blockchain"):
-                    tx = chain.register_model(provenance)
-                    st.success(f"Registered. Transaction: `{tx}`")
-                    st.rerun()
+                    try:
+                        tx = chain.register_model(provenance)
+                        st.session_state["flash"] = (
+                            "success",
+                            "Model registered. Transaction: " + (f"[`{tx}`]({chain.tx_url(tx)})" if chain.tx_url(tx) else f"`{tx}`"),
+                        )
+                        st.rerun()
+                    except Exception as e:
+                        st.error(f"Could not register the model: {e}")
 
 # -------------------------------------------------------------------- model
 with tab_model:
