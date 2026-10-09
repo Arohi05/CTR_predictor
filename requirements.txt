@@ -1,5 +1,7 @@
-streamlit
-scikit-learn
-joblib
-pandas
-numpy
+streamlit>=1.50
+scikit-learn>=1.5
+joblib>=1.4
+pandas>=2.2
+numpy>=1.26
+web3[tester]>=7.0
+pytest>=8.0

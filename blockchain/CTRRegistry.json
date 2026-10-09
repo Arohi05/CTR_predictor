@@ -1,0 +1,320 @@
+{
+  "contractName": "CTRRegistry",
+  "solc": "0.8.24+commit.e11b9ed9.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "EmptyBatch",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "IndexOutOfRange",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotOwner",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "blockHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "merkleRoot",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint32",
+          "name": "recordCount",
+          "type": "uint32"
+        }
+      ],
+      "name": "BatchAnchored",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "modelHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "version",
+          "type": "string"
+        }
+      ],
+      "name": "ModelRegistered",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "blockHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "merkleRoot",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint32",
+          "name": "recordCount",
+          "type": "uint32"
+        }
+      ],
+      "name": "anchorBatch",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "batchCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "modelHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "findModel",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "found",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getBatch",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "blockHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "merkleRoot",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "recordCount",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint64",
+              "name": "timestamp",
+              "type": "uint64"
+            }
+          ],
+          "internalType": "struct CTRRegistry.Batch",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getModel",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "modelHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "datasetHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "metricsHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "string",
+              "name": "version",
+              "type": "string"
+            },
+            {
+              "internalType": "uint64",
+              "name": "timestamp",
+              "type": "uint64"
+            }
+          ],
+          "internalType": "struct CTRRegistry.ModelInfo",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "modelCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "modelHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "datasetHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "metricsHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "version",
+          "type": "string"
+        }
+      ],
+      "name": "registerModel",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "blockHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "verifyBatch",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561000f575f80fd5b505f80546001600160a01b03191633179055610ae88061002e5f395ff3fe608060405234801561000f575f80fd5b5060043610610090575f3560e01c80636d361694116100635780636d3616941461013e5780638da5cb5b1461015e578063a8ddcd6514610188578063c6a645fe146101ab578063dff54bba146101b3575f80fd5b806306f130561461009457806314e30d4d146100ab5780632f54a857146100be5780635ac44282146100e8575b5f80fd5b6001545b6040519081526020015b60405180910390f35b6100986100b9366004610752565b6101c6565b6100d16100cc366004610790565b610357565b6040805192151583526020830191909152016100a2565b6100fb6100f6366004610790565b6103ca565b6040516100a29190815181526020808301519082015260408083015163ffffffff169082015260609182015167ffffffffffffffff169181019190915260800190565b61015161014c366004610790565b610481565b6040516100a291906107a7565b5f54610170906001600160a01b031681565b6040516001600160a01b0390911681526020016100a2565b61019b610196366004610830565b6105bf565b60405190151581526020016100a2565b600254610098565b6100986101c1366004610850565b6105fb565b5f80546001600160a01b031633146101f1576040516330cd747160e01b815260040160405180910390fd5b8163ffffffff165f036102175760405163c2e5347d60e01b815260040160405180910390fd5b5060018054604080516080810182528681526020810186815263ffffffff80871683850190815267ffffffffffffffff4281166060860190815287890189555f989098529351600387027fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf681019190915592517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf7840155517fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf890920180549651909316640100000000026bffffffffffffffffffffffff1990961691161793909317909255905181907f9170e55551fe0744202227d8677852bec78710d0750ecdeed4ab567835eaec1e9061034890879087908790928352602083019190915263ffffffff16604082015260600190565b60405180910390a29392505050565b6002545f9081905b80156103bf578360026103736001846108e9565b81548110610383576103836108fc565b905f5260205f2090600502015f0154036103ad5760016103a381836108e9565b9250925050915091565b806103b781610910565b91505061035f565b505f93849350915050565b604080516080810182525f808252602082018190529181018290526060810191909152600154821061040f57604051631390f2a160e01b815260040160405180910390fd5b60018281548110610422576104226108fc565b5f918252602091829020604080516080810182526003939093029091018054835260018101549383019390935260029092015463ffffffff81169282019290925264010000000090910467ffffffffffffffff16606082015292915050565b6040805160a0810182525f80825260208201819052918101829052606080820152608081019190915260025482106104cc57604051631390f2a160e01b815260040160405180910390fd5b600282815481106104df576104df6108fc565b905f5260205f2090600502016040518060a00160405290815f8201548152602001600182015481526020016002820154815260200160038201805461052390610925565b80601f016020809104026020016040519081016040528092919081815260200182805461054f90610925565b801561059a5780601f106105715761010080835404028352916020019161059a565b820191905f5260205f20905b81548152906001019060200180831161057d57829003601f168201915b50505091835250506004919091015467ffffffffffffffff1660209091015292915050565b6001545f90831080156105f2575081600184815481106105e1576105e16108fc565b905f5260205f2090600302015f0154145b90505b92915050565b5f80546001600160a01b03163314610626576040516330cd747160e01b815260040160405180910390fd5b600280549050905060026040518060a0016040528088815260200187815260200186815260200185858080601f0160208091040260200160405190810160405280939291908181526020018383808284375f92018290525093855250505067ffffffffffffffff4216602092830152835460018181018655948252908290208351600590920201908155908201519281019290925560408101516002830155606081015190919060038201906106dc90826109bd565b506080820151816004015f6101000a81548167ffffffffffffffff021916908367ffffffffffffffff1602179055505050807faed7967ab11aabc23780959f56c0786556c973d093d02a670b7e6714d6d049c687858560405161074193929190610a7d565b60405180910390a295945050505050565b5f805f60608486031215610764575f80fd5b8335925060208401359150604084013563ffffffff81168114610785575f80fd5b809150509250925092565b5f602082840312156107a0575f80fd5b5035919050565b5f6020808352835160208401526020840151604084015260408401516060840152606084015160a0608085015280518060c08601525f5b818110156107fa5782810184015186820160e0015283016107de565b505f85820160e00152608086015167ffffffffffffffff811660a08701529250601f01601f19169390930160e001949350505050565b5f8060408385031215610841575f80fd5b50508035926020909101359150565b5f805f805f60808688031215610864575f80fd5b853594506020860135935060408601359250606086013567ffffffffffffffff80821115610890575f80fd5b818801915088601f8301126108a3575f80fd5b8135818111156108b1575f80fd5b8960208285010111156108c2575f80fd5b9699959850939650602001949392505050565b634e487b7160e01b5f52601160045260245ffd5b818103818111156105f5576105f56108d5565b634e487b7160e01b5f52603260045260245ffd5b5f8161091e5761091e6108d5565b505f190190565b600181811c9082168061093957607f821691505b60208210810361095757634e487b7160e01b5f52602260045260245ffd5b50919050565b634e487b7160e01b5f52604160045260245ffd5b601f8211156109b857805f5260205f20601f840160051c810160208510156109965750805b601f840160051c820191505b818110156109b5575f81556001016109a2565b50505b505050565b815167ffffffffffffffff8111156109d7576109d761095d565b6109eb816109e58454610925565b84610971565b602080601f831160018114610a1e575f8415610a075750858301515b5f19600386901b1c1916600185901b178555610a75565b5f85815260208120601f198616915b82811015610a4c57888601518255948401946001909101908401610a2d565b5085821015610a6957878501515f19600388901b60f8161c191681555b505060018460011b0185555b505050505050565b83815260406020820152816040820152818360608301375f818301606090810191909152601f909201601f191601019291505056fea2646970667358221220286b8cf100f748b6030699cd38173e59a500eb4d5ae693bc26b5ddd97178d17a64736f6c63430008180033"
+}
