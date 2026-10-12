@@ -119,3 +119,4 @@ or `CTR_CONTRACT_ADDRESS` to reuse an existing deployment. To change the contrac
 | `deploy_chain.py` | One command to deploy to a test network and register the model |
 | `tests/` | Automated tests |
 | `Main.ipynb` | Original exploration notebook (kept for reference; `main.py` supersedes its model) |
+| `analysis/` | Exploratory data analysis: 12 SQL queries, 7 charts and written insights ([read the findings](analysis/README.md)) |
